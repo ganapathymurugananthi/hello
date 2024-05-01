@@ -63,7 +63,6 @@ function CreateTask({ modal , toggle , saveTask }){
             setTaskDescription('');
         } else {
             toggle();
-            toast.error('Failed to create task. Please try again later.');
         }
         
         
