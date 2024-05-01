@@ -41,7 +41,7 @@ function Card({taskObj , index , deleteTask , updateListArray , completeTask}){
 
                     <div className="card-body">
                         <h6>{taskObj.Name}</h6>
-                        <small className="text_truncate">{taskObj.Description}</small>
+                        <small className="text-truncate" style={{ maxWidth : '60%'}}>{taskObj.Description}</small>
                     </div>
 
                     <div className="card-footer">

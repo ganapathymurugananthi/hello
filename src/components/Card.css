@@ -41,9 +41,6 @@
     flex-direction: column;
     padding: unset !important;
 }
-.text_truncate{
-    max-width: 60%;
-}
 .card-footer{
     background-color: transparent !important;
     border-top: none !important;
