@@ -1,0 +1,336 @@
+@import url("https://fonts.googleapis.com/css2?family=RocknRoll+One&display=swap");
+
+html {
+  line-height: 1.15;
+}
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "RocknRoll One", sans-serif;
+}
+body{
+  background: linear-gradient(190deg, #867bcd, #6a5aab);
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: #222;
+  overflow-x: hidden;
+}
+.todo_list{
+  color: #fff;
+  margin-bottom: 2rem;
+  text-align: center;
+  text-shadow: 0 0 5px #433aa8, 3px -1px 5px #271c6c;
+}
+.todo_list:hover{
+  transform: translateY(0px) scale(1.1) translateZ(0px);
+}
+.standard_btn{
+    background-color: #271c6c !important;
+    border: 2px solid #e1ebfd !important;
+    box-shadow: 2px 4px 10px #271c6c !important;
+    color: #e1ebfd;
+}
+.standard_btn:hover,
+.close_btn:hover{
+  transform: scale(1.1) translateZ(0px);
+}
+.close_btn{
+  background-color: transparent !important;
+  color: #271c6c !important;
+  border: 2px solid #271c6c !important;
+
+}
+.modal-header .modal-title{
+  margin-left: auto;
+  animation: tada;
+  animation-duration: 3s; 
+}
+.modal-header{
+  border-bottom: none !important;
+}
+.modal-footer{
+  border-top: none !important;
+}
+.modal-content{
+  background: radial-gradient(circle, rgba(180, 182, 218, .9) 0, rgba(226, 236, 253, .9) 100%) !important;
+  color: #271c6c !important;
+}
+.header{
+  padding:50px;
+} 
+.task-container {
+  max-width: 980px;
+  margin: 0 auto;
+}
+.task-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+.card-container {
+  margin: 20px 10px;
+}
+.card {
+  background: radial-gradient(circle, rgba(180, 182, 218, .9) 0, rgba(226, 236, 253, .9) 100%) !important;
+  border-radius:10px !important;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  width: 300px;
+  padding: 20px;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+  height: 100%;
+}
+.card:hover {
+  transform: translateY(-10px) !important;
+}
+.card-header{
+  background-color: transparent !important;
+  border-bottom: unset !important ;
+  padding:unset !important
+}
+.card-header p{
+  font-size: 17px;
+  cursor: auto;
+  float: right;
+}
+.card-header .done_card{
+  color: #5DC250;
+}
+.card-header .active_card{
+  color: #F48687;
+}
+.card-body {
+  display: flex;
+  flex-direction: column;
+  padding: unset !important;
+}
+.card-footer{
+  background-color: transparent !important;
+  border-top: none !important;
+  margin-top:25px;
+}
+.card h6 {
+  margin: 0;
+  font-size: 1.2rem;
+  color: #271c6c;
+}
+.card small {
+  margin-top: 5px;
+  color: #271c6c;
+}
+
+@media (min-width:641px) and (max-width:992px){
+  .task-container{
+    max-width: 650px;
+  }
+}
+@media (max-width:641px){
+  .task-wrapper{
+    justify-content: center;
+  }
+  .button-container{
+    display: flex;
+    justify-content: center;
+    margin-left: unset !important;
+  }
+  .search-icon-container{
+    display: flex;
+    justify-content: center !important;
+  }
+  .main-container{
+    display: block !important;
+  }
+  .search-input{
+    width:35% !important;
+  }
+  .search-icon-container{
+    margin-top:20px;
+    margin-right:unset !important;
+  }
+}
+
+.card-top{
+  width: 100%;
+  height: 2%;
+  border-radius:10px;
+}
+
+@media (max-width:769px){
+  .card-wrapper{
+    width:100%;
+    margin:20px 30px;
+  }
+  .task-container{
+    padding: unset;
+  }
+}
+
+
+@keyframes iconScale {
+  0% {
+      transform: scale(1);
+  }
+  50% {
+      transform: scale(1.2);
+  }
+  100% {
+      transform: scale(1);
+  }
+}
+
+.edit-icon, .check-icon, .delete-icon {
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  color:#B964F7;
+}
+
+@keyframes rotate {
+  0% {
+      transform: rotate(0deg);
+  }
+  100% {
+      transform: rotate(360deg);
+  }
+}
+
+.edit-icon:hover, .check-icon:hover, .delete-icon:hover {
+  animation: rotate 1s linear;
+}
+
+
+@keyframes slideInRight {
+  0% {
+    transform: translateX(150%);
+    opacity: 0;
+  }
+  60% {
+    transform: translateX(0%);
+  }
+  80% {
+    transform: translateX(-10px);
+  }
+  100% {
+    transform: translateX(0%);
+    opacity: 1;
+  }
+}
+
+.card {
+  animation: slideInRight 0.3s ease-out forwards; /* Adjust the animation duration here */
+}
+.button-container{
+  margin-left:8px;
+  margin-top:20px;
+  display: flex;
+  align-items: center;
+}
+.search-icon-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  margin-right:30px;
+  margin-top: 10px;
+}
+.search-button{
+  background-color: #271c6c !important;
+}
+.search-button .search_icon:hover{
+  transform: scale(1.1);
+}
+.search-button , .search-input{
+  border-radius: 0px !important;
+}
+.custom-button {
+  position: relative;
+  background-color: transparent !important;
+  border: none !important;
+  color: #e1ebfd;
+  padding-bottom: 5px;
+  overflow: hidden;
+  transition: color 0.3s ease;
+  z-index: 1;
+}
+.custom-button::after,
+.custom-button::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #e1ebfd;
+  transition: width 0.3s ease;
+  opacity: 0;
+  z-index: -1;
+}
+.custom-button::before {
+  right: 0;
+  left: auto;
+  background-color: #271c6c;
+  opacity: 0;
+}
+.custom-button:hover::after,
+.custom-button:hover::before {
+  width: 100%;
+  opacity: 1;
+  animation: shine 1s infinite linear;
+}
+.custom-button:hover {
+  background-size: auto;
+  transform: scale(1.1);
+  z-index: 2;
+  color: #271c6c !important;
+}
+
+@keyframes shine {
+  0% {
+    opacity: 0;
+    transform: translateX(-150%);
+  }
+  50% {
+    opacity: 1;
+    transform: translateX(150%);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(150%);
+  }
+}
+
+.active{
+  color: #271c6c !important;
+}
+.main-container{
+  display: flex;
+  margin-bottom: 50px;
+}
+.floating-action-buttons {
+  position: fixed;
+  top: 50%; 
+  transform: translateY(-50%); 
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+.floating-action-buttons button {
+  margin-top: 30px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: none;
+  background: #271c6c;
+  color: #fff;
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.floating-action-buttons button:hover {
+  background:radial-gradient(circle, rgba(180, 182, 218, .9) 0, rgba(226, 236, 253, .9) 100%) !important;
+}
