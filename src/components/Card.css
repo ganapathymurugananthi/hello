@@ -1,0 +1,118 @@
+/* Card component CSS starts */
+
+.card_container {
+    margin: 15px 10px;
+}
+.card {
+    background: radial-gradient(circle, rgba(0, 0, 0, 0.01) 0, rgba(0, 0, 0, 0.005) 100%), radial-gradient(circle, rgba(180, 182, 218, .9) 0, rgba(226, 236, 253, .9) 100%) !important;
+    border-radius:10px !important;
+    box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.5);
+    width: 300px;
+    padding: 20px;
+    transition: transform 0.3s ease;
+    cursor: pointer;
+    height: 100%;
+    animation: slideInLeft 0.3s ease-out forwards;
+}
+.card:hover {
+    transform: translateY(-10px) !important;
+}
+.card-header{
+    background-color: transparent !important;
+    border-bottom: unset !important;
+    padding:unset !important;
+}
+.card-header p{
+    font-size: 17px;
+    cursor: pointer;
+    float: right;
+}
+.card-header p:hover {
+    animation: blink 1s infinite;
+}
+.card-header .done_card{
+    color: #5DC250;
+}
+.card-header .active_card{
+    color: #F48687;
+}
+.card-body {
+    display: flex;
+    flex-direction: column;
+    padding: unset !important;
+}
+.text_truncate{
+    max-width: 60%;
+}
+.card-footer{
+    background-color: transparent !important;
+    border-top: none !important;
+    margin-top:25px;
+}
+.card-footer .footer_icons{
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+}
+.card h6 {
+    margin: 0;
+    font-size: 19px;
+    color: #271c6c;
+}
+.card small {
+    margin-top: 5px;
+    color: #271c6c;
+}
+.edit_icon, .check_icon{
+    padding-right: 10px;
+}
+.edit_icon, .check_icon, .delete_icon {
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    color:#B964F7;
+}
+.edit_icon:hover, .check_icon:hover, .delete_icon:hover {
+    animation: rotate 1s linear;
+}
+
+/* Keframe CSS starts */
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes slideInLeft {
+    0% {
+      transform: translateX(-150%);
+      opacity: 0;
+    }
+    60% {
+      transform: translateX(0%);
+    }
+    80% {
+      transform: translateX(10px);
+    }
+    100% {
+      transform: translateX(0%);
+      opacity: 1;
+    }
+}
+
+@keyframes blink {
+    0%, 50%, 100% {
+      opacity: 1;
+    }
+    25%, 75% {
+      opacity: 0;
+    }
+  }
+
+/* Keframe CSS ends */
+
+
+/* Card component CSS ends */

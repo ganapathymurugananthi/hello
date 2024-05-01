@@ -1,9 +1,10 @@
 import React, { useState , useEffect } from "react";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Input, Label } from 'reactstrap';
 import { toast } from 'react-toastify';
+import '../modals/Modal.css';
 
 
-function CreateTask({modal , toggle , saveTask}){
+function CreateTask({ modal , toggle , saveTask }){
 
     //useState
     const [taskName , setTaskName] = useState('');
@@ -36,25 +37,35 @@ function CreateTask({modal , toggle , saveTask}){
     //Handling create function
     const handleCreate = () =>{
 
-        //Validators
-        if(!taskName || !taskDescription){
-            toast.error('Please fill all fields.');
-            toggle();
+        //Input field validation message
+        if (!taskName.trim() || !taskDescription.trim()) {
+            if (!taskName.trim() && !taskDescription.trim()) {
+                toast.error('Task Name and Description are required.');
+            } else if (!taskName.trim()) {
+                toast.error('Task Name is required.');
+            } else {
+                toast.error('Task Description is required.');
+            }
             return;
         }
         
         //Saving task object
-        let taskObj = {
+        const savedSuccessfully = saveTask({
             Name: taskName,
             Description: taskDescription
-        };
+        });
 
-        saveTask(taskObj);
-        toggle();
-        toast.success('Task created successfully!');
+        //Validating for duplicate entry of task name alone
+        if (savedSuccessfully) {
+            toggle();
+            toast.success('Task created successfully!');
+            setTaskName('');
+            setTaskDescription('');
+        } else {
+            toggle();
+            toast.error('Failed to create task. Please try again later.');
+        }
         
-        setTaskName('');
-        setTaskDescription('');
         
     }
 
@@ -73,6 +84,7 @@ function CreateTask({modal , toggle , saveTask}){
                             onChange={handleChange}
                             name="taskName"
                             placeholder="Enter Task Name"
+                            autoComplete="off"
                         />
                     </FormGroup>
                     <FormGroup>
@@ -89,7 +101,7 @@ function CreateTask({modal , toggle , saveTask}){
                             style={{resize : 'none'}}
                             maxLength={50}
                         ></textarea>
-                        <small className={taskDescription.length > 50 ? 'text-danger' : 'text-muted'}>
+                        <small className='text-danger'>
                             {taskDescription.length} / 50 characters
                         </small>
                     </FormGroup>

@@ -1,0 +1,198 @@
+/* Todo list component CSS starts */
+
+.todo_list{
+    color: #fff;
+    margin-bottom: 2rem;
+    text-align: center;
+    text-shadow: 0 0 5px #433aa8, 3px -1px 5px #271c6c;
+}
+.todo_list:hover{
+    transform: translateY(0px) scale(1.1) translateZ(0px);
+}
+.header{
+    padding:50px;
+}
+.task_container {
+    max-width: 980px;
+    margin: 0 auto;
+}
+.task_wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+.button_container{
+    margin-left:8px;
+    margin-top:20px;
+    display: flex;
+    align-items: center;
+}
+.search_icon_container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    margin-right:30px;
+    margin-top: 10px;
+}
+.search_button{
+    background-color: #271c6c !important;
+}
+.search_button .search_icon:hover{
+    transform: scale(1.1);
+}
+.search_icon_container:hover {
+    transform: translateY(-3px);
+}
+.search_button , .search_input{
+    border-radius: 0px !important;
+}
+.custom_button {
+    position: relative;
+    background-color: transparent !important;
+    border: none !important;
+    color: #e1ebfd;
+    padding-bottom: 5px;
+    overflow: hidden;
+    transition: color 0.3s ease;
+    z-index: 1;
+}
+.custom_button::after,
+.custom_button::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #e1ebfd;
+    transition: width 0.3s ease;
+    opacity: 0;
+    z-index: -1;
+}
+.custom_button::before {
+    right: 0;
+    left: auto;
+    background-color: #271c6c;
+    opacity: 0;
+}
+.custom_button:hover::after,
+.custom_button:hover::before {
+    width: 100%;
+    opacity: 1;
+    animation: shine 1s infinite linear;
+}
+.custom_button:hover {
+    background-size: auto;
+    transform: scale(1.1);
+    z-index: 2;
+    color: #271c6c !important;
+}
+.active{
+    color: #271c6c !important;
+}
+.main_container{
+    display: flex;
+    margin-bottom: 50px;
+}
+.floating_action_buttons {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+.floating_action_buttons button {
+    margin-top: 30px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: none;
+    background: #271c6c;
+    color: #fff;
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.floating_action_buttons button:hover {
+    background:radial-gradient(circle, rgba(180, 182, 218, .9) 0, rgba(226, 236, 253, .9) 100%) !important;
+    animation: floating 0.5s ease infinite;
+    color: #271c6c;
+}
+
+/* Keyframe CSS starts */
+
+@keyframes shine {
+    0% {
+        opacity: 0;
+        transform: translateX(-150%);
+    }
+    50% {
+        opacity: 1;
+        transform: translateX(150%);
+    }
+    100% {
+        opacity: 0;
+        transform: translateX(150%);
+    }
+}
+
+@keyframes floating {
+    0% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+
+/* Keyframe CSS ends */
+
+/* Responsive CSS starts */
+
+@media (min-width:641px) and (max-width:992px){
+    .task_container{
+        max-width: 650px;
+    }
+}
+
+@media (max-width:641px){
+    .task_wrapper{
+        justify-content: center;
+    }
+    .button_container{
+        display: flex;
+        justify-content: center;
+        margin-left: unset !important;
+    }
+    .search_icon_container{
+        display: flex;
+        justify-content: center !important;
+        margin-top:20px;
+        margin-right:unset !important;
+    }
+    .main_container{
+        display: block !important;
+    }
+    .search_input{
+        width:35% !important;
+    }
+}
+
+@media (max-width:769px){
+    .task_container{
+      padding: unset;
+    }
+}
+
+/* Responsive CSS ends */
+
+
+/* Todo list component CSS ends */

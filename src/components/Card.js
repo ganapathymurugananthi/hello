@@ -2,6 +2,7 @@ import React , {useState} from "react";
 import { MdOutlineDeleteOutline , MdCheck } from "react-icons/md";
 import { FiEdit2 } from "react-icons/fi";
 import EditTask from "../modals/EditTask";
+import './Card.css';
 
 
 function Card({taskObj , index , deleteTask , updateListArray , completeTask}){
@@ -31,7 +32,7 @@ function Card({taskObj , index , deleteTask , updateListArray , completeTask}){
     return(
 
         <>
-            <div className="card-container">
+            <div className="card_container">
                 <div className="card">
 
                     <div className="card-header">
@@ -40,18 +41,18 @@ function Card({taskObj , index , deleteTask , updateListArray , completeTask}){
 
                     <div className="card-body">
                         <h6>{taskObj.Name}</h6>
-                        <small className="text-truncate" style={{ maxWidth: "60%" }}>{taskObj.Description}</small>
+                        <small className="text_truncate">{taskObj.Description}</small>
                     </div>
 
                     <div className="card-footer">
-                        <div style={{ position: 'absolute', right: '20px', bottom: '20px' }}>
+                        <div className="footer_icons">
                             {!taskObj.completed && (
                                 <>
-                                    <FiEdit2 className="edit-icon" style={{ paddingRight: '10px', fontSize: '25px' }} onClick={() => setModal(true)} />
-                                    <MdCheck className="check-icon" style={{ paddingRight: '10px', fontSize: '30px' }} onClick={handleCompleted} />
+                                    <FiEdit2 className="edit_icon" style={{ fontSize: '25px' }} onClick={() => setModal(true)} />
+                                    <MdCheck className="check_icon" style={{ fontSize: '30px' }} onClick={handleCompleted} />
                                 </>
                             )}
-                            <MdOutlineDeleteOutline className="delete-icon" style={{ fontSize: '20px' }} onClick={() => handleDelete(taskObj.completed)} />
+                            <MdOutlineDeleteOutline className="delete_icon" style={{ fontSize: '20px' }} onClick={() => handleDelete(taskObj.completed)} />
                         </div>
                     </div>
                 </div>

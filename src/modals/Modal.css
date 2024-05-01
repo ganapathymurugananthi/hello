@@ -1,0 +1,19 @@
+/* Modal component common CSS starts */
+
+.modal-header .modal-title{
+    margin-left: auto;
+    animation: tada;
+    animation-duration: 3s; 
+}
+.modal-header{
+    border-bottom: none !important;
+}
+.modal-footer{
+    border-top: none !important;
+}
+.modal-content{
+    background: radial-gradient(circle, rgba(180, 182, 218, .9) 0, rgba(226, 236, 253, .9) 100%) !important;
+    color: #271c6c !important;
+}
+
+/* Modal component common CSS ends */

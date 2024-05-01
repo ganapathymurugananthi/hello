@@ -7,6 +7,7 @@ import { toast } from 'react-toastify';
 import { FaSearch } from 'react-icons/fa';
 import { RiDeleteBin2Line } from 'react-icons/ri';
 import { LuCheckCheck } from "react-icons/lu";
+import './TodoList.css';
 
 
 function TodoList(){
@@ -18,12 +19,11 @@ function TodoList(){
     }
     const [taskList , setTaskList] = useState([]);
     const [activeFilter, setActiveFilter] = useState('active');
-    const cardContainerRef = useRef(null);
     const [completedTasks, setCompletedTasks] = useState([]);
     const [searchQuery, setSearchQuery] = useState(false);
     const [matchedCards, setMatchedCards] = useState([]);
     const [searchValue, setSearchValue] = useState('');
-    const [isExpanded, setIsExpanded] = useState(false);
+    const cardContainerRef = useRef(null);
 
     //Getting the task list and completed task list from local storage
     useEffect(() => {
@@ -56,7 +56,6 @@ function TodoList(){
                 task.Name.toLowerCase().includes(query) || task.Description.toLowerCase().includes(query)
             );
         }
-
         else { 
             const matchedTasksFromList = taskList.filter(task =>
                 task.Name.toLowerCase().includes(query) || task.Description.toLowerCase().includes(query)
@@ -81,13 +80,16 @@ function TodoList(){
 
     }
 
-    //Handling search icon hover
-    const handleSearchIconHover = () => {
-        setIsExpanded(!isExpanded);
-    }
-
     //Saving the task
     const saveTask = (taskObj) =>{
+
+        //Validating for duplicate entry of task name alone
+        const isDuplicate = taskList.some(task => task.Name.toLowerCase() === taskObj.Name.toLowerCase());
+
+        if (isDuplicate) {
+            toast.error('Task with the same name or description already exists!');
+            return false;
+        }
 
         let tempList = [...taskList];
         tempList.push(taskObj);
@@ -99,8 +101,12 @@ function TodoList(){
         //Card animation
         if (cardContainerRef.current) {
             const newCard = cardContainerRef.current.lastChild;
-            newCard.classList.add('slideInRight');
+            newCard.classList.add('slideInLeft');
         }
+
+        handleFilterChange('active');
+
+        return true;
 
     }
 
@@ -109,7 +115,7 @@ function TodoList(){
 
         Swal.fire({
             title: "Are you sure?",
-            text: "You won't be able to revert this!",
+            text: "This action will delete selected task. This cannot be undone!",
             icon: "warning",
             showCancelButton: true,
             confirmButtonColor: "#271c6c",
@@ -124,6 +130,7 @@ function TodoList(){
             }
           }).then((result) => {
             if (result.isConfirmed) {
+                
                 if(!isCompleted){
                     let updatedList = [...taskList];
                     updatedList.splice(index, 1);
@@ -136,7 +143,9 @@ function TodoList(){
                     setCompletedTasks(updatedCompletedTasks);
                     localStorage.setItem('Completed Task List', JSON.stringify(updatedCompletedTasks));
                 }
+
                 toast.success('Task Deleted Successfully!');
+
             }
         });
 
@@ -175,8 +184,9 @@ function TodoList(){
     const deleteAllTasks = () =>{
 
         //Validators
-        if (taskList.length === 0 && completedTasks.length === 0) {
-            toast.error('No tasks available to delete.');
+        const noTasks = taskList.length === 0 && completedTasks.length === 0;
+        if (noTasks) {
+            toast.info('No tasks available to delete.');
             return;
         }
         
@@ -216,7 +226,8 @@ function TodoList(){
     const completeAllTasks = () =>{
 
         // Check if there are no tasks
-        if (taskList.length === 0 && completedTasks.length === 0) {
+        const noTasks = taskList.length === 0 && completedTasks.length === 0;
+        if (noTasks) {
             toast.info('No tasks available to complete!');
             return;
         }
@@ -265,6 +276,7 @@ function TodoList(){
     
                 toast.success('All tasks marked as completed!');
 
+                setActiveFilter('completed');
             }
         });
 
@@ -275,38 +287,38 @@ function TodoList(){
        <>
             <div className="header text-center">
                 <h3 className="todo_list">Todo List</h3>
-                <Button className="mt-2 standard_btn major_btns" onClick={() => setModal(true)}>Create Task</Button>
+                <Button className="mt-2 standard_btn" onClick={() => setModal(true)}>Create Task</Button>
             </div>
 
-            <div className="task-container" ref={cardContainerRef}>
-                <div className="main-container">
+            <div className="task_container" ref={cardContainerRef}>
+                <div className="main_container">
                     
-                    <div className="button-container">
+                    <div className="button_container">
                         <Button
-                            className={`custom-button ${activeFilter === 'active' ? 'active' : ''}`}
+                            className={`custom_button ${activeFilter === 'active' ? 'active' : ''}`}
                             onClick={() => handleFilterChange('active')}
                         >
                             Active
                         </Button>
                         <Button
-                            className={`custom-button ${activeFilter === 'completed' ? 'active' : ''}`}
+                            className={`custom_button ${activeFilter === 'completed' ? 'active' : ''}`}
                             onClick={() => handleFilterChange('completed')}
                         >
                             Completed
                         </Button>
                         <Button
-                            className={`custom-button ${activeFilter === 'all' ? 'active' : ''}`}
+                            className={`custom_button ${activeFilter === 'all' ? 'active' : ''}`}
                             onClick={() => handleFilterChange('all')}
                         >
                             All
                         </Button>
                     </div>
 
-                    <div className="search-icon-container" onMouseEnter={handleSearchIconHover} onMouseLeave={handleSearchIconHover}>
+                    <div className="search_icon_container">
                         <Input
                             type="text"
                             placeholder="Search..."
-                            className={`search-input ${isExpanded ? 'expanded' : ''}`}
+                            className="search_input"
                             value={searchValue}
                             onChange={(e) => {
                                 setSearchValue(e.target.value);
@@ -314,11 +326,11 @@ function TodoList(){
                             }}
                             disabled={taskList.length === 0 && completedTasks.length === 0}
                         />
-                        <Button className={`search-button ${isExpanded ? 'expanded' : ''}`}><FaSearch className="search_icon" /></Button>
+                        <Button className="search_button"><FaSearch className="search_icon" /></Button>
                     </div>
                 </div>
 
-                <div className="task-wrapper">
+                <div className="task_wrapper">
 
                     { matchedCards.length > 0 && activeFilter === 'active' ? (
                         matchedCards.map((obj, index) => (
@@ -388,11 +400,11 @@ function TodoList(){
 
             </div>
 
-            <div className="floating-action-buttons">
-                <button className="delete-btn">
+            <div className="floating_action_buttons">
+                <button>
                     <RiDeleteBin2Line onClick={deleteAllTasks} title="DeleteAll?"/>
                 </button>
-                <button className="complete-btn">
+                <button>
                     <LuCheckCheck onClick={completeAllTasks} title="CompleteAll"/>
                 </button>
             </div>

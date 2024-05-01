@@ -3,23 +3,23 @@ import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, In
 import { toast } from 'react-toastify';
 
 
-function EditTask({modal , toggle , updateTask , taskObj}){
+function EditTask({ modal , toggle , updateTask , taskObj }){
 
     //useState
     const [taskName , setTaskName] = useState('');
     const [taskDescription , setTaskDescription] = useState('');
 
     //Handling task name and description
-    useEffect (() => {
-
-        setTaskName(taskObj.Name);
-        setTaskDescription(taskObj.Description);
-
-    }, [taskObj.Name, taskObj.Description])
+    useEffect(() => {
+        if (taskObj) {
+            setTaskName(taskObj.Name || '');
+            setTaskDescription(taskObj.Description || '');
+        }
+    }, [taskObj]);
     
     //Handling change function
     const handleChange = (e) =>{
-        
+
         const {name , value} = e.target;
 
         if(name === 'taskName'){
@@ -41,7 +41,7 @@ function EditTask({modal , toggle , updateTask , taskObj}){
         }
 
         //Updating task obj
-        let updatedTaskObj = {
+        const updatedTaskObj = {
             Name: taskName,
             Description: taskDescription
         };
@@ -85,7 +85,7 @@ function EditTask({modal , toggle , updateTask , taskObj}){
             <ModalFooter>
                 <Button className="standard_btn" onClick={handleUpdate}>
                     Update
-                </Button>{' '}
+                </Button>
                 <Button className="close_btn" onClick={toggle}>
                     Cancel
                 </Button>
