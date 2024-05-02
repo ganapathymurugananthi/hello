@@ -30,6 +30,7 @@ body{
 .standard_btn:hover,
 .close_btn:hover{
   transform: scale(1.1) translateZ(0px);
+  animation: pulse 1s infinite;
 }
 .close_btn{
   background-color: transparent !important;
@@ -45,6 +46,18 @@ body{
   }
   12.5%, 37.5%, 62.5%, 87.5% {
     background: linear-gradient(90deg, #6a5aab, #867bcd);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
   }
 }
 

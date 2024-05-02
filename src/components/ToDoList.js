@@ -87,7 +87,7 @@ function TodoList(){
         const isDuplicate = taskList.some(task => task.Name.toLowerCase() === taskObj.Name.toLowerCase());
 
         if (isDuplicate) {
-            toast.error('Task with the same name or description already exists!');
+            toast.error('Task with the same name already exists!');
             return false;
         }
 
@@ -121,7 +121,6 @@ function TodoList(){
             confirmButtonColor: "#271c6c",
             cancelButtonColor: "#d33",
             confirmButtonText: "Yes, delete it!",
-            timer : 5000,
             showClass: {
               popup: 'animate__animated animate__zoomIn'
             },
@@ -199,7 +198,6 @@ function TodoList(){
             cancelButtonColor: '#d33',
             confirmButtonText: 'Yes, delete all!',
             cancelButtonText: 'Cancel',
-            timer : 5000,
             showClass: {
               popup: 'animate__animated animate__zoomIn'
             },
@@ -249,7 +247,6 @@ function TodoList(){
             cancelButtonColor: '#d33',
             confirmButtonText: 'Yes, complete all!',
             cancelButtonText: 'Cancel',
-            timer : 5000,
             showClass: {
               popup: 'animate__animated animate__zoomIn'
             },
@@ -286,7 +283,7 @@ function TodoList(){
     return(
        <>
             <div className="header text-center">
-                <h3 className="todo_list">Todo List</h3>
+                <h3 className="todo_list animate__animated animate__tada">Todo List</h3>
                 <Button className="mt-2 standard_btn" onClick={() => setModal(true)}>Create Task</Button>
             </div>
 
